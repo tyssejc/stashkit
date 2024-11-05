@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Initialize Storage Action</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-800 grid grid-flow-col auto-cols-max">
+  <div class="p-4">
+    <div class="bg-blue-100 border border-blue-400 text-blue-700 p-3 rounded">
+      <div>
+        Override extension settings if needed. Leave fields empty to use extension defaults.
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <label class="block text-sm font-medium" for="storageKey">Storage Key (optional)</label>
+      <input type="text" 
+             class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+             name="storageKey" 
+             id="storageKey"
+             placeholder="Use extension default">
+    </div>
+
+    <div class="mt-4">
+      <label class="block text-sm font-medium" for="storageType">Storage Type (optional)</label>
+      <select class="mt-1 block w-full border border-gray-300 rounded-md p-2" name="storageType" id="storageType">
+        <option value="">Use extension default</option>
+        <option value="localStorage">Local Storage</option>
+        <option value="sessionStorage">Session Storage</option>
+      </select>
+    </div>
+
+    <div class="mt-4">
+      <label class="inline-flex items-center">
+        <input type="checkbox" 
+               class="form-checkbox" 
+               name="debugMode" 
+               id="debugMode">
+        <span class="ml-2">Debug Mode (optional)</span>
+      </label>
+    </div>
+  </div>
+
+  <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+  <script>
+    window.extensionBridge.register({
+      init: function(info) {
+        const { settings } = info;
+        if (settings) {
+          document.getElementById('storageKey').value = settings.storageKey || '';
+          document.getElementById('storageType').value = settings.storageType || '';
+          document.getElementById('debugMode').checked = settings.debugMode || false;
+        }
+      },
+      getSettings: function() {
+        const settings = {};
+        const storageKey = document.getElementById('storageKey').value;
+        const storageType = document.getElementById('storageType').value;
+        const debugMode = document.getElementById('debugMode').checked;
+
+        if (storageKey) settings.storageKey = storageKey;
+        if (storageType) settings.storageType = storageType;
+        if (debugMode) settings.debugMode = true;
+
+        return settings;
+      },
+      validate: function(settings) {
+        return true;
+      }
+    });
+  </script>
+</body>
+</html>

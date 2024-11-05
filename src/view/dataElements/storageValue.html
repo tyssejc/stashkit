@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Storage Value Data Element</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-800 grid grid-flow-col auto-cols-max">
+  <div class="p-4">
+    <div class="mt-4">
+      <label class="block text-sm font-medium" for="key">Storage Key</label>
+      <input type="text" 
+             class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+             name="key" 
+             id="key"
+             required>
+      <div class="text-xs text-gray-500">The key to retrieve from storage</div>
+    </div>
+  </div>
+
+  <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+  <script>
+    window.extensionBridge.register({
+      init: function(info) {
+        const { settings } = info;
+        if (settings) {
+          document.getElementById('key').value = settings.key || '';
+        }
+      },
+      validate: function() {
+        return !!document.getElementById('key').value;
+      },
+      getSettings: function() {
+        return {
+          key: document.getElementById('key').value
+        };
+      }
+    });
+  </script>
+</body>
+</html>

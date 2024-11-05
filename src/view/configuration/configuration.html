@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Analytics Storage Configuration</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-800 grid grid-flow-col auto-cols-max">
+  <div class="p-4">
+    <div class="mt-4">
+      <label class="block text-sm font-medium" for="storageKey">Storage Key</label>
+      <input type="text" 
+             class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+             name="storageKey" 
+             id="storageKey"
+             value="_analytics">
+      <div class="text-xs text-gray-500">Key used to store data in web storage</div>
+    </div>
+
+    <div class="mt-4">
+      <label class="block text-sm font-medium" for="storageType">Storage Type</label>
+      <select class="mt-1 block w-full border border-gray-300 rounded-md p-2" name="storageType" id="storageType">
+        <option value="localStorage" selected>Local Storage</option>
+        <option value="sessionStorage">Session Storage</option>
+      </select>
+      <div class="text-xs text-gray-500">Type of web storage to use</div>
+    </div>
+
+    <div class="mt-4">
+      <label class="inline-flex items-center">
+        <input type="checkbox" 
+               class="form-checkbox" 
+               name="autoInit" 
+               id="autoInit"
+               checked>
+        <span class="ml-2">Auto Initialize</span>
+      </label>
+      <div class="text-xs text-gray-500">Initialize storage automatically when Launch loads</div>
+    </div>
+
+    <div class="mt-4">
+      <label class="inline-flex items-center">
+        <input type="checkbox" 
+               class="form-checkbox" 
+               name="debugMode" 
+               id="debugMode">
+        <span class="ml-2">Debug Mode</span>
+      </label>
+      <div class="text-xs text-gray-500">Enable debug logging and console panel</div>
+    </div>
+  </div>
+
+  <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+  <script>
+    window.extensionBridge.register({
+      init: function(info) {
+        const { settings } = info;
+        if (settings) {
+          document.getElementById('storageKey').value = settings.storageKey || '_analytics';
+          document.getElementById('storageType').value = settings.storageType || 'localStorage';
+          document.getElementById('autoInit').checked = settings.autoInit !== false;
+          document.getElementById('debugMode').checked = settings.debugMode || false;
+        }
+      },
+      validate: function() {
+        const storageKey = document.getElementById('storageKey').value;
+        if (!storageKey) {
+          return false;
+        }
+        return true;
+      },
+      getSettings: function() {
+        return {
+          storageKey: document.getElementById('storageKey').value,
+          storageType: document.getElementById('storageType').value,
+          autoInit: document.getElementById('autoInit').checked,
+          debugMode: document.getElementById('debugMode').checked
+        };
+      }
+    });
+  </script>
+</body>
+</html>

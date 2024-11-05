@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Set Storage Value Action</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-800 grid grid-flow-col auto-cols-max">
+  <div class="p-4">
+    <div class="mt-4">
+      <label class="block text-sm font-medium" for="key">Storage Key</label>
+      <input type="text" 
+             class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+             name="key" 
+             id="key"
+             required>
+      <div class="text-xs text-gray-500">The key to store this value under</div>
+    </div>
+
+    <div class="mt-4">
+      <label class="block text-sm font-medium" for="value">Value</label>
+      <input type="text" 
+             class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+             name="value" 
+             id="value"
+             required>
+      <div class="text-xs text-gray-500">The value to store (supports data elements)</div>
+    </div>
+
+    <div class="mt-4">
+      <label class="inline-flex items-center">
+        <input type="checkbox" 
+               class="form-checkbox" 
+               name="clearOnRead" 
+               id="clearOnRead"
+               checked>
+        <span class="ml-2">Clear After Read</span>
+      </label>
+      <div class="text-xs text-gray-500">Clear this value after first read</div>
+    </div>
+
+    <div class="mt-4">
+      <label class="block text-sm font-medium" for="clearWith">Clear Together With</label>
+      <input type="text" 
+             class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
+             name="clearWith" 
+             id="clearWith"
+             placeholder="key1, key2, key3">
+      <div class="text-xs text-gray-500">Comma-separated list of other keys to clear when this value is cleared</div>
+    </div>
+  </div>
+
+  <script src="https://assets.adobedtm.com/activation/reactor/extensionbridge/extensionbridge.min.js"></script>
+  <script>
+    window.extensionBridge.register({
+      init: function(info) {
+        const { settings } = info;
+        if (settings) {
+          document.getElementById('key').value = settings.key || '';
+          document.getElementById('value').value = settings.value || '';
+          document.getElementById('clearOnRead').checked = settings.clearOnRead !== false;
+          document.getElementById('clearWith').value = (settings.clearWith || []).join(', ');
+        }
+      },
+      validate: function() {
+        const key = document.getElementById('key').value;
+        const value = document.getElementById('value').value;
+        return key.length > 0 && value.length > 0;
+      },
+      getSettings: function() {
+        const clearWith = document.getElementById('clearWith').value
+          .split(',')
+          .map(function(key) { return key.trim(); })
+          .filter(function(key) { return key.length > 0; });
+
+        return {
+          key: document.getElementById('key').value,
+          value: document.getElementById('value').value,
+          clearOnRead: document.getElementById('clearOnRead').checked,
+          clearWith: clearWith
+        };
+      }
+    });
+  </script>
+</body>
+</html>

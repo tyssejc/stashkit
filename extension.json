@@ -1,0 +1,145 @@
+{
+  "displayName": "StashKit",
+  "name": "stashkit",
+  "version": "1.0.7",
+  "description": "Centralized storage solution for persisting data to be collected later.",
+  "author": {
+    "name": "Charlie Tysse",
+    "email": "charlie@ctysse.net"
+  },
+  "platform": "web",
+  "viewBasePath": "src/view/",
+  "iconPath": "icon.svg",
+  "main": "src/lib/main.js",
+  "configuration": {
+    "viewPath": "configuration/configuration.html",
+    "schema": {
+      "$schema": "http://json-schema.org/draft-04/schema#",
+      "type": "object",
+      "properties": {
+        "storageKey": {
+          "type": "string",
+          "title": "Storage Key",
+          "description": "Key used to store data in web storage",
+          "default": "_analytics"
+        },
+        "storageType": {
+          "type": "string",
+          "title": "Storage Type",
+          "description": "Type of web storage to use",
+          "enum": [
+            "localStorage",
+            "sessionStorage"
+          ],
+          "default": "localStorage"
+        },
+        "debugMode": {
+          "type": "boolean",
+          "title": "Debug Mode",
+          "description": "Enable debug logging and console panel",
+          "default": false
+        },
+        "autoInit": {
+          "type": "boolean",
+          "title": "Auto Initialize",
+          "description": "Initialize storage automatically when Launch loads",
+          "default": true
+        }
+      },
+      "required": [
+        "storageKey",
+        "storageType",
+        "autoInit"
+      ]
+    }
+  },
+  "events": [],
+  "conditions": [],
+  "actions": [
+    {
+      "displayName": "Initialize Storage",
+      "name": "initialize-storage",
+      "libPath": "src/lib/actions/initializeStorage.js",
+      "viewPath": "actions/initializeStorage.html",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "storageKey": {
+            "type": "string",
+            "title": "Storage Key (optional)",
+            "description": "Override default storage key"
+          },
+          "storageType": {
+            "type": "string",
+            "title": "Storage Type (optional)",
+            "description": "Override default storage type",
+            "enum": [
+              "localStorage",
+              "sessionStorage"
+            ]
+          },
+          "debugMode": {
+            "type": "boolean",
+            "title": "Debug Mode (optional)",
+            "description": "Override default debug setting"
+          }
+        }
+      }
+    },
+    {
+      "displayName": "Set Storage Value",
+      "name": "set-storage-value",
+      "libPath": "src/lib/actions/setStorageValue.js",
+      "viewPath": "actions/setStorageValue.html",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Storage Key"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value"
+          },
+          "clearOnRead": {
+            "type": "boolean",
+            "title": "Clear After Read",
+            "default": true
+          },
+          "clearWith": {
+            "type": "array",
+            "title": "Clear Together With",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "key",
+          "value"
+        ]
+      }
+    }
+  ],
+  "dataElements": [
+    {
+      "displayName": "Storage Value",
+      "name": "storage-value",
+      "libPath": "src/lib/dataElements/storageValue.js",
+      "viewPath": "dataElements/storageValue.html",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Storage Key"
+          }
+        },
+        "required": [
+          "key"
+        ]
+      }
+    }
+  ]
+}
