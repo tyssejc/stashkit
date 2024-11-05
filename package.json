@@ -1,0 +1,28 @@
+{
+  "name": "stashkit",
+  "version": "1.0.7",
+  "description": "Centralized storage solution for persisting data to be collected later.",
+  "author": {
+    "name": "Charlie Tysse",
+    "email": "charlie@ctysse.net"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tyssejc/stashkit.git"
+  },
+  "engines": {
+    "node": ">=20.10.0",
+    "npm": ">=10.2.3"
+  },
+  "scripts": {
+    "dev": "npx @adobe/reactor-sandbox",
+    "build": "npx @adobe/reactor-packager",
+    "upload": "dotenv -- npx @adobe/reactor-uploader@next",
+    "publish": "npm run build && npm run upload",
+    "release": "dotenv -- npx @adobe/reactor-releaser@next"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^7.4.2"
+  }
+}
