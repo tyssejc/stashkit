@@ -1,7 +1,7 @@
 {
   "displayName": "StashKit",
   "name": "stashkit",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Centralized storage solution for persisting data to be collected later.",
   "author": {
     "name": "Charlie Tysse",

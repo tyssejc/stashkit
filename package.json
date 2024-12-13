@@ -1,6 +1,6 @@
 {
   "name": "stashkit",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Centralized storage solution for persisting data to be collected later.",
   "author": {
     "name": "Charlie Tysse",
@@ -20,9 +20,15 @@
     "build": "npx @adobe/reactor-packager",
     "upload": "dotenv -- npx @adobe/reactor-uploader@next",
     "publish": "npm run build && npm run upload",
-    "release": "dotenv -- npx @adobe/reactor-releaser@next"
+    "release": "dotenv -- npx @adobe/reactor-releaser@next",
+    "test": "mocha test/**/*.test.js"
   },
   "devDependencies": {
-    "dotenv-cli": "^7.4.2"
+    "chai": "^4.3.10",
+    "dotenv-cli": "^7.4.2",
+    "jsdom": "^23.0.1",
+    "mocha": "^10.2.0",
+    "proxyquire": "^2.1.3",
+    "sinon": "^17.0.1"
   }
 }
