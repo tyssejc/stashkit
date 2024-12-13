@@ -1,4 +1,4 @@
-var initializeAnalytics = require('../helpers/initializeAnalytics');
+var initializeStashKit = require('../helpers/initializeStashKit');
 
 module.exports = function(settings, event) {
   // Get extension settings
@@ -12,5 +12,5 @@ module.exports = function(settings, event) {
       settings.debugMode : extensionSettings.debugMode
   };
 
-  return initializeAnalytics(finalSettings);
+  return initializeStashKit(finalSettings);
 };

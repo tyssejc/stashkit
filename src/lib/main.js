@@ -1,8 +1,8 @@
-const initializeAnalytics = require('./helpers/initializeAnalytics');
+const initializeStashKit = require('./helpers/initializeStashKit');
 
 module.exports = function(settings) {
   if (settings.autoInit) {
-    turbine.logger.info('Initializing analytics storage');
-    initializeAnalytics(settings);
+    turbine.logger.info('Initializing StashKit');
+    initializeStashKit(settings);
   }
 };

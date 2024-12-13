@@ -1,11 +1,11 @@
 module.exports = function(settings) {
-  const analytics = window._analytics;
-  if (!analytics) {
-    turbine.logger.error('Analytics Storage not initialized');
+  const stashkit = window._stashkit;
+  if (!stashkit) {
+    turbine.logger.error('StashKit not initialized');
     return;
   }
   
-  analytics.set(settings.key, settings.value, {
+  stashkit.set(settings.key, settings.value, {
     clearOnRead: settings.clearOnRead,
     clearWith: settings.clearWith || []
   });

@@ -1,14 +1,14 @@
-// src/lib/helpers/AnalyticsStorage.js
+// src/lib/helpers/StashKit.js
 /**
- * Creates an instance of AnalyticsStorage to persist analytics data across page loads.
+ * Creates an instance of StashKit to persist analytics data across page loads.
  * Values are cleared from storage after first read by default.
  * 
  * @constructor
- * @param {string} [storageKey='_analytics'] - Key used to store data in web storage
+ * @param {string} [storageKey='_stashkit'] - Key used to store data in web storage
  * @param {boolean} [useLocalStorage=true] - If true, uses localStorage; if false, uses sessionStorage
  */
-class AnalyticsStorage {
-  constructor(storageKey = '_analytics', useLocalStorage = true) {
+class StashKit {
+  constructor(storageKey = '_stashkit', useLocalStorage = true) {
     this.storageKey = storageKey;
     this.storage = useLocalStorage ? localStorage : sessionStorage;
     this.data = this.load();
@@ -18,7 +18,7 @@ class AnalyticsStorage {
     
     // Log initialization in debug mode
     if (turbine.getExtensionSettings().debugMode) {
-      turbine.logger.log(`Analytics Storage initialized:
+      turbine.logger.log(`StashKit initialized:
         Storage Key: ${this.storageKey}
         Storage Type: ${useLocalStorage ? 'localStorage' : 'sessionStorage'}
         Current Size: ${this.getSize()} bytes`);
@@ -201,4 +201,4 @@ class AnalyticsStorage {
   }
 }
 
-module.exports = AnalyticsStorage;
+module.exports = StashKit;

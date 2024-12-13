@@ -21,7 +21,7 @@
           "type": "string",
           "title": "Storage Key",
           "description": "Key used to store data in web storage",
-          "default": "_analytics"
+          "default": "_stashkit"
         },
         "storageType": {
           "type": "string",

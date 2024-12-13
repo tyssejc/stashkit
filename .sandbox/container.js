@@ -3,7 +3,7 @@ module.exports = {
     "analytics-storage-extension": {
       "displayName": "Analytics Storage",
       "settings": {
-        "storageKey": "_analytics",
+        "storageKey": "_stash",
         "storageType": "localStorage",
         "autoInit": true,
         "debugMode": true

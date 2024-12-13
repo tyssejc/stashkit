@@ -23,7 +23,7 @@ StashKit helps solve common analytics implementation challenges by providing a r
 
 StashKit can be configured with the following options:
 
-- **Storage Key** - The key used to store data in web storage (default: `_analytics`)
+- **Storage Key** - The key used to store data in web storage (default: `_stashkit`)
 - **Storage Type** - Choose between `localStorage` or `sessionStorage` (default: `localStorage`)
 - **Debug Mode** - Enable debug logging and console panel
 - **Auto Initialize** - Initialize storage automatically when Launch loads
@@ -63,12 +63,12 @@ Configuration options:
 
 ## Example Use Cases
 
-While you can store values using the extension's action, you can also use the `_analytics.set` and `_analytics.get` methods to store and retrieve values in custom code.
+While you can store values using the extension's action, you can also use the `_stashkit.set` and `_stashkit.get` methods to store and retrieve values in custom code.
 
 ### Cross-Page Data Sharing
 ```javascript
 // Store data on page 1
-_analytics.set('cartValue', 149.99 });
+_stashkit.set('cartValue', 149.99 });
 
 // Access on page 2 via data element
 // Create data element with key 'cartValue'
@@ -77,7 +77,7 @@ _analytics.set('cartValue', 149.99 });
 ### Persisting User Preferences
 ```javascript
 // Store user consent choice
-_analytics.setMultiple({
+_stashkit.setMultiple({
   analyticsConsent: 'granted',
   adConsent: 'granted',
   personalizationConsent: 'granted',
@@ -94,14 +94,14 @@ _analytics.setMultiple({
 // By default, the value is deleted after it's read.
 // You can use the data element's Storage Duration to keep it available for all references
 // on the page load.
-const cartValue = _analytics.get('cartValue');
+const cartValue = _stashkit.get('cartValue');
 ```
 
 ## Debugging
 
 When debug mode is enabled, StashKit logs operations to the console and provides a debug panel accessed via:
 ```javascript
-window._analytics.debug();
+window._stashkit.debug();
 ```
 
 ## Best Practices

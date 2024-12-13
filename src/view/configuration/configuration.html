@@ -13,7 +13,7 @@
              class="mt-1 block w-full border border-gray-300 rounded-md p-2" 
              name="storageKey" 
              id="storageKey"
-             value="_analytics">
+             value="_stashkit">
       <div class="text-xs text-gray-500">Key used to store data in web storage</div>
     </div>
 
@@ -56,7 +56,7 @@
       init: function(info) {
         const { settings } = info;
         if (settings) {
-          document.getElementById('storageKey').value = settings.storageKey || '_analytics';
+          document.getElementById('storageKey').value = settings.storageKey || '_stashkit';
           document.getElementById('storageType').value = settings.storageType || 'localStorage';
           document.getElementById('autoInit').checked = settings.autoInit !== false;
           document.getElementById('debugMode').checked = settings.debugMode || false;
